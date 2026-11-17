@@ -177,6 +177,9 @@ class RAGPipeline:
                 f"Content:\n{chunk['document']}"
             )
 
+            # # meta data print for debugging
+            # print(metadata.get('document_name', 'Not specified'))
+
         context = "\n\n".join(context_parts)
 
         # 2. Define answer-generation instructions
