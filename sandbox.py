@@ -1,13 +1,15 @@
 import chromadb
 from sentence_transformers import SentenceTransformer
 
-model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+from src.RAGPipeline import EMBEDDING_MODEL_NAME
+
+model = SentenceTransformer(EMBEDDING_MODEL_NAME)
 
 # 로컬 디스크에 저장
 client = chromadb.PersistentClient(path="./chroma_data")
 
 collection = client.get_or_create_collection(
-    name="policy_chunks_minilm_v1",
+    name="policy_demo_bge_m3_v1",
     embedding_function=None,  # 임베딩은 아래에서 직접 생성
     configuration={"hnsw": {"space": "cosine"}},
 )

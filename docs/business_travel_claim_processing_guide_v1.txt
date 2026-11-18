@@ -1,0 +1,37 @@
+Alderbrook Analytics
+Business Travel Claim Processing Guide
+Document Code: FIN-118
+Related Policy: EXP-310, Business Expense Reimbursement Policy
+Version: 1.0
+Effective Date: January 1, 2026
+Document Owner: Finance Operations
+
+Section 1. Purpose and Applicability
+
+This guide describes the standard reimbursement rules and submission workflow for personally paid business travel expenses at Alderbrook Analytics. It applies to all employees taking approved business trips within the United States on or after January 1, 2026. All monetary amounts are in United States dollars. Employees and reviewing managers should use this guide when preparing ordinary travel claims in the Expense Portal. Home office equipment purchases follow policy EQ-204 and are outside the scope of this guide.
+
+Section 2. Approval Before Travel
+
+Employees must obtain written approval from their direct manager before booking a trip. The approval must state the business purpose, destination, expected travel dates, and estimated total cost. An approval email is acceptable when attached to the expense claim. Approval of a trip does not authorize personal expenses or automatically approve every submitted charge. Employees must retain the approval record and update it if the destination, dates, or estimated total changes materially before travel begins.
+
+Section 3. Standard Hotel Reimbursement
+
+For ordinary domestic business travel under EXP-310, the standard hotel reimbursement limit is $220 per room per night before mandatory taxes. This limit applies across United States destinations and does not require a high-cost destination exception. Finance reimburses the actual eligible room charge up to this nightly limit and reviews mandatory taxes separately. For example, a standard room costing $200 before mandatory taxes is within the ordinary hotel limit when the trip has the required approval and supporting receipt.
+
+Employees must attach the final hotel folio showing the nightly room charges and mandatory taxes. Optional hotel services, minibar purchases, entertainment, and charges for accompanying family members are excluded. If the employee shares a room with a colleague, the same room charge may not be claimed twice. Charges above the standard nightly limit require a separately documented exception before booking. Employees should contact Finance Operations for guidance when they cannot find a suitable room within the standard limit.
+
+Section 4. Standard Meal Reimbursement
+
+Meals during approved overnight business travel are reimbursed at actual cost up to $85 per employee per calendar day, including tax and tips. This is the standard daily meal limit for ordinary domestic trips, not an exception rate or a fixed per diem. Breakfast, lunch, and dinner share the same daily total. For example, eligible meal receipts totaling $75 on one travel day are within the standard limit. Employees cannot transfer an unused amount from one day to another.
+
+Alcohol is excluded. A meal supplied by a conference organizer or included in a hotel rate cannot be claimed again. Employees must identify the travel date for each meal receipt so Finance can calculate the daily total correctly. Where a receipt includes personal or excluded items, the employee must identify those items and subtract them from the claimed amount. Only costs personally paid by the employee are eligible for reimbursement.
+
+Section 5. Claim Deadline and Documentation
+
+Employees must submit a complete domestic business travel claim within 45 calendar days after the trip ends. This is the standard submission deadline under EXP-310 and does not require a late-submission exception. A claim submitted 40 calendar days after the end of the trip is within the ordinary deadline. Employees should submit earlier when possible to allow time for corrections and payment processing.
+
+Every expense requires an itemized receipt identifying the vendor, transaction date, description, and amount. Proof of payment is required when the receipt does not establish payment. Credit-card statements may support proof of payment but do not replace itemized receipts. Employees must include the manager's travel approval, business purpose, and cost center in the Expense Portal submission.
+
+Section 6. Review, Payment, and Corrections
+
+The manager reviews the business purpose and cost center before Finance checks documentation, category limits, and duplicate claims. Finance normally completes its review within 10 business days after receiving a complete, manager-approved claim. Approved amounts are paid in the next scheduled reimbursement run. Employees must notify Finance if a vendor issues a refund or they discover an incorrect amount. Company-card transactions must follow the company-card process and cannot also be claimed as personally paid expenses.

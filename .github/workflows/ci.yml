@@ -1,0 +1,35 @@
+name: RAG Pipeline CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v10
+        with:
+          enable-cache: true
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: Run pytest
+        run: uv run pytest -v --cov=. --cov-report=term-missing
+
+      - name: Run RAG Evaluation
+        env:
+          FOUNDRY_ENDPOINT: ${{ secrets.FOUNDRY_ENDPOINT }}
+          FOUNDRY_API_KEY: ${{ secrets.FOUNDRY_API_KEY }}
+          FOUNDRY_DECISION_DEPLOYMENT: ${{ secrets.FOUNDRY_DECISION_DEPLOYMENT }}
+        run: uv run python run_evaluation.py
