@@ -28,9 +28,7 @@ jobs:
       - name: Run pytest
         run: uv run pytest -v --cov=. --cov-report=term-missing
 
-      - name: Run RAG Evaluation
-        env:
-          FOUNDRY_ENDPOINT: ${{ secrets.FOUNDRY_ENDPOINT }}
-          FOUNDRY_API_KEY: ${{ secrets.FOUNDRY_API_KEY }}
-          FOUNDRY_DECISION_DEPLOYMENT: ${{ secrets.FOUNDRY_DECISION_DEPLOYMENT }}
-        run: uv run python run_evaluation.py
+      # Retrieval-only evaluation: no API calls, so no secrets are needed.
+      # Generation and the decision judge run locally with --generation --judge.
+      - name: Run RAG retrieval evaluation
+        run: uv run python test/run_eval.py
