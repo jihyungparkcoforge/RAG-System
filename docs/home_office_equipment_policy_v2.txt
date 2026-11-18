@@ -1,0 +1,34 @@
+Alderbrook Analytics
+Home Office Equipment Reimbursement Policy
+Policy Code: EQ-204
+Version: 2.0
+Effective Date: January 1, 2026
+Policy Owner: People Operations
+
+Section 1. Purpose and Scope
+
+This policy explains how Alderbrook Analytics supports employees who need equipment for an approved home office. It applies to employees assigned to remote or hybrid work in the United States. Employees working exclusively from a company office should request equipment from the office inventory instead. All amounts in this policy are in United States dollars. This policy governs personal purchases submitted for reimbursement; company-issued laptops and other assets follow the separate IT asset request process.
+
+Section 2. Eligibility
+
+Full-time employees become eligible after completing 90 calendar days of continuous employment. Eligibility is measured on the purchase date, not the date the reimbursement request is submitted. The employee must have an approved remote or hybrid work arrangement recorded by People Operations. Part-time employees, interns, and independent contractors are not eligible under this policy. Managers cannot waive these employment-status or service-length requirements. Employees must confirm eligibility before purchasing equipment, because an approval given in error does not establish eligibility.
+
+Section 3. Annual Allowance and Covered Items
+
+Eligible employees may claim up to $500 per calendar year, including sales tax and standard shipping. Covered items are computer monitors, keyboards, mice, webcams, headsets, laptop stands, and monitor arms. Desks, chairs, decorative lighting, internet subscriptions, mobile phones, and gaming accessories are excluded. Specialized accommodation requests must be directed to People Operations for an individual review before purchase; this policy does not establish a separate accommodation allowance.
+
+The allowance resets on January 1. Unused funds do not carry forward, and multiple purchases count toward the same annual limit. For example, an approved $320 monitor purchase leaves $180 available for other eligible purchases that year. The annual limit is not increased when an employee changes teams or managers. Purchases made before the employee becomes eligible cannot be reimbursed from a later year's allowance.
+
+Section 4. Approval Before Purchase
+
+Employees must submit an Equipment Purchase Request in the employee portal before placing an order. The request must include the item description, estimated total cost, business purpose, and a product link or quotation. The direct manager reviews the business need, and People Operations confirms eligibility and the remaining allowance. Approval is complete only when both reviews appear as approved in the portal. An informal chat message or verbal agreement is not sufficient. A request must be submitted again if the selected item or total cost changes after approval.
+
+Section 5. Claim Submission and Payment
+
+After receiving the equipment, employees must upload an itemized receipt and proof of payment to the approved request within 30 calendar days of the purchase date. The receipt must show the vendor, purchase date, items, tax, shipping, and total paid. Credit-card statements alone are not accepted as itemized receipts. Claims must be submitted under the Home Office Equipment category rather than general business expenses.
+
+Finance reviews complete claims within 10 business days. Approved claims are paid through the next available payroll cycle after Finance approval. A claim with missing documentation is returned to the employee, and the review period restarts when the complete documentation is received. Employees may view the claim's status in the portal; a submitted claim is not evidence that payment has been approved.
+
+Section 6. Returns, Ownership, and Questions
+
+Reimbursed equipment remains the employee's property. If an item is returned, the employee must notify Finance within five business days of receiving the refund. Finance will arrange repayment and restore the corresponding allowance after repayment is recorded. Employees may not submit the same purchase to another company reimbursement program. People Operations answers eligibility questions, while Finance handles receipt and payment questions. This version applies to purchases made on or after its effective date.
