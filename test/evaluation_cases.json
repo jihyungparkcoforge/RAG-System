@@ -1,0 +1,316 @@
+[
+  {
+    "id": "current_allowance",
+    "question": "Under the 2026 home-office policy, what is the annual equipment allowance, and does it include tax and shipping?",
+    "expected_answer": "$500 per calendar year, including sales tax and standard shipping.",
+    "expected_chunk_ids": [
+      "home_office_equipment_policy_v2.txt:0007"
+    ],
+    "evidence_quotes": {
+      "home_office_equipment_policy_v2.txt:0007": "up to $500 per calendar year, including sales tax and standard shipping"
+    },
+    "context_ids": [
+      "home_office_equipment_policy_v2.txt:0000"
+    ],
+    "answer_checks": [
+      {
+        "name": "amount",
+        "pattern": "\\$\\s*500\\b|\\b500\\s*(?:USD|dollars)"
+      },
+      {
+        "name": "annual",
+        "pattern": "calendar year|annual|per year"
+      },
+      {
+        "name": "tax",
+        "pattern": "tax"
+      },
+      {
+        "name": "shipping",
+        "pattern": "shipping"
+      }
+    ]
+  },
+  {
+    "id": "current_eligibility",
+    "question": "Under the 2026 home-office policy, how many days must a full-time employee work before becoming eligible, and when is eligibility measured?",
+    "expected_answer": "90 calendar days of continuous employment; measured on the purchase date.",
+    "expected_chunk_ids": [
+      "home_office_equipment_policy_v2.txt:0004"
+    ],
+    "evidence_quotes": {
+      "home_office_equipment_policy_v2.txt:0004": "after completing 90 calendar days of continuous employment"
+    },
+    "context_ids": [
+      "home_office_equipment_policy_v2.txt:0000"
+    ],
+    "answer_checks": [
+      {
+        "name": "tenure",
+        "pattern": "\\b(?:90|ninety)\\s+calendar days"
+      },
+      {
+        "name": "purchase date",
+        "pattern": "purchase date|date of (?:the )?purchase"
+      }
+    ]
+  },
+  {
+    "id": "current_claim_deadline",
+    "question": "Under the 2026 home-office policy, what must employees upload and how soon after the purchase?",
+    "expected_answer": "An itemized receipt and proof of payment within 30 calendar days of the purchase date.",
+    "expected_chunk_ids": [
+      "home_office_equipment_policy_v2.txt:0012"
+    ],
+    "evidence_quotes": {
+      "home_office_equipment_policy_v2.txt:0012": "within 30 calendar days of the purchase date"
+    },
+    "context_ids": [
+      "home_office_equipment_policy_v2.txt:0000"
+    ],
+    "answer_checks": [
+      {
+        "name": "deadline",
+        "pattern": "\\b(?:30|thirty)\\s+calendar days"
+      },
+      {
+        "name": "receipt",
+        "pattern": "itemized receipt"
+      },
+      {
+        "name": "payment proof",
+        "pattern": "proof of payment"
+      },
+      {
+        "name": "purchase date",
+        "pattern": "purchase"
+      }
+    ]
+  },
+  {
+    "id": "purchase_approval",
+    "question": "Under the 2026 home-office policy, where is the equipment purchase request submitted and who reviews it before an order?",
+    "expected_answer": "Submit an Equipment Purchase Request in the employee portal before ordering; direct manager and People Operations must both approve.",
+    "expected_chunk_ids": [
+      "home_office_equipment_policy_v2.txt:0010"
+    ],
+    "evidence_quotes": {
+      "home_office_equipment_policy_v2.txt:0010": "Employees must submit an Equipment Purchase Request in the employee portal before placing an order."
+    },
+    "context_ids": [
+      "home_office_equipment_policy_v2.txt:0000"
+    ],
+    "answer_checks": [
+      {
+        "name": "portal",
+        "pattern": "portal"
+      },
+      {
+        "name": "manager",
+        "pattern": "manager"
+      },
+      {
+        "name": "People Operations",
+        "pattern": "People\\s+(?:Operations|Ops)"
+      },
+      {
+        "name": "before purchase",
+        "pattern": "before|prior to"
+      },
+      {
+        "name": "approval",
+        "pattern": "approv"
+      }
+    ]
+  },
+  {
+    "id": "receipt_evidence",
+    "question": "Under the 2026 home-office policy, can a credit-card statement alone replace an itemized receipt?",
+    "expected_answer": "No. Credit-card statements alone are not accepted as itemized receipts.",
+    "expected_chunk_ids": [
+      "home_office_equipment_policy_v2.txt:0012"
+    ],
+    "evidence_quotes": {
+      "home_office_equipment_policy_v2.txt:0012": "Credit-card statements alone are not accepted as itemized receipts."
+    },
+    "context_ids": [
+      "home_office_equipment_policy_v2.txt:0000"
+    ],
+    "answer_checks": [
+      {
+        "name": "rejection",
+        "pattern": "\\bno\\b|not accepted|cannot|can.t|insufficient|not sufficient"
+      },
+      {
+        "name": "receipt",
+        "pattern": "itemized receipt"
+      },
+      {
+        "name": "statement",
+        "pattern": "statement"
+      }
+    ]
+  },
+  {
+    "id": "ownership_and_refund",
+    "question": "Under the 2026 home-office policy, who owns reimbursed equipment and when must Finance be notified after receiving a refund?",
+    "expected_answer": "The employee owns it. Notify Finance within five business days of receiving the refund.",
+    "expected_chunk_ids": [
+      "home_office_equipment_policy_v2.txt:0014"
+    ],
+    "evidence_quotes": {
+      "home_office_equipment_policy_v2.txt:0014": "Reimbursed equipment remains the employee's property."
+    },
+    "context_ids": [
+      "home_office_equipment_policy_v2.txt:0000"
+    ],
+    "answer_checks": [
+      {
+        "name": "employee ownership",
+        "pattern": "employee.{0,50}(?:property|own)|(?:own|belong).{0,50}employee"
+      },
+      {
+        "name": "Finance",
+        "pattern": "Finance"
+      },
+      {
+        "name": "deadline",
+        "pattern": "\\b(?:5|five)\\s+business days"
+      },
+      {
+        "name": "refund",
+        "pattern": "refund"
+      }
+    ]
+  },
+  {
+    "id": "historical_allowance",
+    "question": "For a purchase governed by the historical 2025 home-office equipment policy, what was the annual allowance including tax and shipping?",
+    "expected_answer": "$300 per calendar year, including sales tax and standard shipping.",
+    "expected_chunk_ids": [
+      "home_office_equipment_policy_v1.txt:0007"
+    ],
+    "evidence_quotes": {
+      "home_office_equipment_policy_v1.txt:0007": "up to $300 per calendar year for home-office equipment"
+    },
+    "context_ids": [
+      "home_office_equipment_policy_v1.txt:0000"
+    ],
+    "answer_checks": [
+      {
+        "name": "historical amount",
+        "pattern": "\\$\\s*300\\b|\\b300\\s*(?:USD|dollars)"
+      },
+      {
+        "name": "tax",
+        "pattern": "tax"
+      },
+      {
+        "name": "shipping",
+        "pattern": "shipping"
+      }
+    ]
+  },
+  {
+    "id": "finance_review",
+    "question": "Under the 2026 home-office policy, how long does Finance take to review complete claims and when are approved claims paid?",
+    "expected_answer": "Review within 10 business days; payment through the next available payroll cycle after Finance approval.",
+    "expected_chunk_ids": [
+      "home_office_equipment_policy_v2.txt:0013"
+    ],
+    "evidence_quotes": {
+      "home_office_equipment_policy_v2.txt:0013": "Finance reviews complete claims within 10 business days."
+    },
+    "context_ids": [
+      "home_office_equipment_policy_v2.txt:0000"
+    ],
+    "answer_checks": [
+      {
+        "name": "review period",
+        "pattern": "\\b(?:10|ten)\\s+business days"
+      },
+      {
+        "name": "payment cycle",
+        "pattern": "next.{0,30}payroll"
+      },
+      {
+        "name": "approval",
+        "pattern": "approv"
+      }
+    ]
+  },
+  {
+    "id": "hotel_conflict",
+    "question": "What standard nightly hotel limit do EXP-310 and FIN-118 each give for ordinary domestic travel? Do the documents agree?",
+    "expected_answer": "EXP-310 states $180 per room per night before mandatory taxes; FIN-118 states $220. The documents conflict, with no priority established.",
+    "expected_chunk_ids": [
+      "business_expense_reimbursement_policy_v1.txt:0007",
+      "business_travel_claim_processing_guide_v1.txt:0007"
+    ],
+    "evidence_quotes": {
+      "business_expense_reimbursement_policy_v1.txt:0007": "Hotel reimbursement is limited to $180 per room per night before mandatory taxes.",
+      "business_travel_claim_processing_guide_v1.txt:0007": "standard hotel reimbursement limit is $220 per room per night before mandatory taxes."
+    },
+    "context_ids": [
+      "business_expense_reimbursement_policy_v1.txt:0000",
+      "business_travel_claim_processing_guide_v1.txt:0000"
+    ],
+    "answer_checks": [
+      {
+        "name": "policy amount",
+        "pattern": "\\$\\s*180\\b|\\b180\\s*(?:USD|dollars)"
+      },
+      {
+        "name": "guide amount",
+        "pattern": "\\$\\s*220\\b|\\b220\\s*(?:USD|dollars)"
+      },
+      {
+        "name": "conflict",
+        "pattern": "conflict|inconsisten|disagree|differ|do not agree"
+      },
+      {
+        "name": "tax basis",
+        "pattern": "before.{0,30}tax|exclud.{0,30}tax|pre.tax"
+      }
+    ]
+  },
+  {
+    "id": "meal_conflict",
+    "question": "What daily meal limits do EXP-310 and FIN-118 each give for ordinary domestic travel, including tax and tips? Do the documents agree?",
+    "expected_answer": "EXP-310 states $65 per employee per day; FIN-118 states $85. Both include tax and tips, and the documents conflict.",
+    "expected_chunk_ids": [
+      "business_expense_reimbursement_policy_v1.txt:0007",
+      "business_travel_claim_processing_guide_v1.txt:0012"
+    ],
+    "evidence_quotes": {
+      "business_expense_reimbursement_policy_v1.txt:0007": "up to $65 per employee per calendar day, including tax and tips.",
+      "business_travel_claim_processing_guide_v1.txt:0012": "up to $85 per employee per calendar day, including tax and tips."
+    },
+    "context_ids": [
+      "business_expense_reimbursement_policy_v1.txt:0000",
+      "business_travel_claim_processing_guide_v1.txt:0000"
+    ],
+    "answer_checks": [
+      {
+        "name": "policy amount",
+        "pattern": "\\$\\s*65\\b|\\b65\\s*(?:USD|dollars)"
+      },
+      {
+        "name": "guide amount",
+        "pattern": "\\$\\s*85\\b|\\b85\\s*(?:USD|dollars)"
+      },
+      {
+        "name": "conflict",
+        "pattern": "conflict|inconsisten|disagree|differ|do not agree"
+      },
+      {
+        "name": "tax",
+        "pattern": "tax"
+      },
+      {
+        "name": "tips",
+        "pattern": "tips"
+      }
+    ]
+  }
+]

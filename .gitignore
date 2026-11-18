@@ -1,0 +1,19 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.env
+uv.lock
+pyproject.toml
+.python-version
+src/__pycache__/
+chroma_data/*
+
+.coverage
+chroma_data/
