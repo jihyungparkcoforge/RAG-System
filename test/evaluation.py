@@ -26,7 +26,7 @@ def missing_env(names):
     return [name for name in names if not os.environ.get(name)]
 
 
-def build_eval_pipeline(db_path):
+def build_eval_pipeline(db_path, chunk_size=800, overlap=50):
     """Create a pipeline on an isolated DB with real models, then ingest docs.
 
     Bypasses RAGPipeline.__init__, which eagerly creates an API client, so
@@ -45,7 +45,7 @@ def build_eval_pipeline(db_path):
     )
     pipeline.embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME, device="cpu")
     pipeline.reranker = CrossEncoder(RERANKER_MODEL_NAME, device="cpu")
-    pipeline.ingest(ROOT / "docs")
+    pipeline.ingest(ROOT / "docs", chunk_size=chunk_size, overlap=overlap)
     return pipeline, client
 
 
@@ -269,6 +269,19 @@ def judge_answer_with_decision(case, answer, *, threshold=0.5):
     }
 
 
+def missing_answer_facts(case, answer):
+    """Names of the case's regex answer checks that the answer does not satisfy."""
+    return [
+        check["name"] for check in case["answer_checks"]
+        if not re.search(check["pattern"], answer, re.IGNORECASE | re.DOTALL)
+    ]
+
+
+def cited_labels(answer):
+    """Source label numbers cited as [S<n>] in the answer, as strings."""
+    return set(re.findall(r"\[S(\d+)\]", answer))
+
+
 def evaluate_generation(pipeline, case, *, run_judge=False, decision_threshold=0.5):
     """Generate from gold evidence and evaluate it with lexical checks.
 
@@ -277,11 +290,8 @@ def evaluate_generation(pipeline, case, *, run_judge=False, decision_threshold=0
     """
     chunks = gold_chunks(pipeline, case)
     answer = pipeline.generate(case["question"], chunks)
-    missing_facts = [
-        check["name"] for check in case["answer_checks"]
-        if not re.search(check["pattern"], answer, re.IGNORECASE | re.DOTALL)
-    ]
-    citations = set(re.findall(r"\[S(\d+)\]", answer))
+    missing_facts = missing_answer_facts(case, answer)
+    citations = cited_labels(answer)
     allowed = {str(i) for i in range(1, len(chunks) + 1)}
     required = {
         str(i) for i, chunk in enumerate(chunks, 1)

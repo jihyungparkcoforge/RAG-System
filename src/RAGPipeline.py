@@ -57,7 +57,7 @@ class RAGPipeline:
         self.llm_model = os.environ["FOUNDRY_DEPLOYMENT_NAME"]
 
 
-    def ingest(self, documents_dir):
+    def ingest(self, documents_dir, chunk_size=800, overlap=50):
         directory = Path(documents_dir)
 
         files = sorted(
@@ -77,7 +77,7 @@ class RAGPipeline:
 
             records = []
 
-            for chunk in chunk_text_recursive(text):
+            for chunk in chunk_text_recursive(text, chunk_size=chunk_size, overlap=overlap):
             # for chunk in chunk_text(text):
                 index = len(records)
 

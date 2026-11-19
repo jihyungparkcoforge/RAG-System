@@ -4,10 +4,10 @@
     "question": "Under the 2026 home-office policy, what is the annual equipment allowance, and does it include tax and shipping?",
     "expected_answer": "$500 per calendar year, including sales tax and standard shipping.",
     "expected_chunk_ids": [
-      "home_office_equipment_policy_v2.txt:0007"
+      "home_office_equipment_policy_v2.txt:0002"
     ],
     "evidence_quotes": {
-      "home_office_equipment_policy_v2.txt:0007": "up to $500 per calendar year, including sales tax and standard shipping"
+      "home_office_equipment_policy_v2.txt:0002": "up to $500 per calendar year, including sales tax and standard shipping"
     },
     "context_ids": [
       "home_office_equipment_policy_v2.txt:0000"
@@ -36,10 +36,10 @@
     "question": "Under the 2026 home-office policy, how many days must a full-time employee work before becoming eligible, and when is eligibility measured?",
     "expected_answer": "90 calendar days of continuous employment; measured on the purchase date.",
     "expected_chunk_ids": [
-      "home_office_equipment_policy_v2.txt:0004"
+      "home_office_equipment_policy_v2.txt:0001"
     ],
     "evidence_quotes": {
-      "home_office_equipment_policy_v2.txt:0004": "after completing 90 calendar days of continuous employment"
+      "home_office_equipment_policy_v2.txt:0001": "after completing 90 calendar days of continuous employment"
     },
     "context_ids": [
       "home_office_equipment_policy_v2.txt:0000"
@@ -60,10 +60,10 @@
     "question": "Under the 2026 home-office policy, what must employees upload and how soon after the purchase?",
     "expected_answer": "An itemized receipt and proof of payment within 30 calendar days of the purchase date.",
     "expected_chunk_ids": [
-      "home_office_equipment_policy_v2.txt:0012"
+      "home_office_equipment_policy_v2.txt:0005"
     ],
     "evidence_quotes": {
-      "home_office_equipment_policy_v2.txt:0012": "within 30 calendar days of the purchase date"
+      "home_office_equipment_policy_v2.txt:0005": "within 30 calendar days of the purchase date"
     },
     "context_ids": [
       "home_office_equipment_policy_v2.txt:0000"
@@ -92,10 +92,10 @@
     "question": "Under the 2026 home-office policy, where is the equipment purchase request submitted and who reviews it before an order?",
     "expected_answer": "Submit an Equipment Purchase Request in the employee portal before ordering; direct manager and People Operations must both approve.",
     "expected_chunk_ids": [
-      "home_office_equipment_policy_v2.txt:0010"
+      "home_office_equipment_policy_v2.txt:0004"
     ],
     "evidence_quotes": {
-      "home_office_equipment_policy_v2.txt:0010": "Employees must submit an Equipment Purchase Request in the employee portal before placing an order."
+      "home_office_equipment_policy_v2.txt:0004": "Employees must submit an Equipment Purchase Request in the employee portal before placing an order."
     },
     "context_ids": [
       "home_office_equipment_policy_v2.txt:0000"
@@ -128,10 +128,10 @@
     "question": "Under the 2026 home-office policy, can a credit-card statement alone replace an itemized receipt?",
     "expected_answer": "No. Credit-card statements alone are not accepted as itemized receipts.",
     "expected_chunk_ids": [
-      "home_office_equipment_policy_v2.txt:0012"
+      "home_office_equipment_policy_v2.txt:0005"
     ],
     "evidence_quotes": {
-      "home_office_equipment_policy_v2.txt:0012": "Credit-card statements alone are not accepted as itemized receipts."
+      "home_office_equipment_policy_v2.txt:0005": "Credit-card statements alone are not accepted as itemized receipts."
     },
     "context_ids": [
       "home_office_equipment_policy_v2.txt:0000"
@@ -156,10 +156,10 @@
     "question": "Under the 2026 home-office policy, who owns reimbursed equipment and when must Finance be notified after receiving a refund?",
     "expected_answer": "The employee owns it. Notify Finance within five business days of receiving the refund.",
     "expected_chunk_ids": [
-      "home_office_equipment_policy_v2.txt:0014"
+      "home_office_equipment_policy_v2.txt:0007"
     ],
     "evidence_quotes": {
-      "home_office_equipment_policy_v2.txt:0014": "Reimbursed equipment remains the employee's property."
+      "home_office_equipment_policy_v2.txt:0007": "Reimbursed equipment remains the employee's property."
     },
     "context_ids": [
       "home_office_equipment_policy_v2.txt:0000"
@@ -188,10 +188,10 @@
     "question": "For a purchase governed by the historical 2025 home-office equipment policy, what was the annual allowance including tax and shipping?",
     "expected_answer": "$300 per calendar year, including sales tax and standard shipping.",
     "expected_chunk_ids": [
-      "home_office_equipment_policy_v1.txt:0007"
+      "home_office_equipment_policy_v1.txt:0002"
     ],
     "evidence_quotes": {
-      "home_office_equipment_policy_v1.txt:0007": "up to $300 per calendar year for home-office equipment"
+      "home_office_equipment_policy_v1.txt:0002": "up to $300 per calendar year for home-office equipment"
     },
     "context_ids": [
       "home_office_equipment_policy_v1.txt:0000"
@@ -216,10 +216,10 @@
     "question": "Under the 2026 home-office policy, how long does Finance take to review complete claims and when are approved claims paid?",
     "expected_answer": "Review within 10 business days; payment through the next available payroll cycle after Finance approval.",
     "expected_chunk_ids": [
-      "home_office_equipment_policy_v2.txt:0013"
+      "home_office_equipment_policy_v2.txt:0006"
     ],
     "evidence_quotes": {
-      "home_office_equipment_policy_v2.txt:0013": "Finance reviews complete claims within 10 business days."
+      "home_office_equipment_policy_v2.txt:0006": "Finance reviews complete claims within 10 business days."
     },
     "context_ids": [
       "home_office_equipment_policy_v2.txt:0000"
@@ -244,12 +244,12 @@
     "question": "What standard nightly hotel limit do EXP-310 and FIN-118 each give for ordinary domestic travel? Do the documents agree?",
     "expected_answer": "EXP-310 states $180 per room per night before mandatory taxes; FIN-118 states $220. The documents conflict, with no priority established.",
     "expected_chunk_ids": [
-      "business_expense_reimbursement_policy_v1.txt:0007",
-      "business_travel_claim_processing_guide_v1.txt:0007"
+      "business_expense_reimbursement_policy_v1.txt:0003",
+      "business_travel_claim_processing_guide_v1.txt:0002"
     ],
     "evidence_quotes": {
-      "business_expense_reimbursement_policy_v1.txt:0007": "Hotel reimbursement is limited to $180 per room per night before mandatory taxes.",
-      "business_travel_claim_processing_guide_v1.txt:0007": "standard hotel reimbursement limit is $220 per room per night before mandatory taxes."
+      "business_expense_reimbursement_policy_v1.txt:0003": "Hotel reimbursement is limited to $180 per room per night before mandatory taxes.",
+      "business_travel_claim_processing_guide_v1.txt:0002": "standard hotel reimbursement limit is $220 per room per night before mandatory taxes."
     },
     "context_ids": [
       "business_expense_reimbursement_policy_v1.txt:0000",
@@ -279,12 +279,12 @@
     "question": "What daily meal limits do EXP-310 and FIN-118 each give for ordinary domestic travel, including tax and tips? Do the documents agree?",
     "expected_answer": "EXP-310 states $65 per employee per day; FIN-118 states $85. Both include tax and tips, and the documents conflict.",
     "expected_chunk_ids": [
-      "business_expense_reimbursement_policy_v1.txt:0007",
-      "business_travel_claim_processing_guide_v1.txt:0012"
+      "business_expense_reimbursement_policy_v1.txt:0003",
+      "business_travel_claim_processing_guide_v1.txt:0004"
     ],
     "evidence_quotes": {
-      "business_expense_reimbursement_policy_v1.txt:0007": "up to $65 per employee per calendar day, including tax and tips.",
-      "business_travel_claim_processing_guide_v1.txt:0012": "up to $85 per employee per calendar day, including tax and tips."
+      "business_expense_reimbursement_policy_v1.txt:0003": "up to $65 per employee per calendar day, including tax and tips.",
+      "business_travel_claim_processing_guide_v1.txt:0004": "up to $85 per employee per calendar day, including tax and tips."
     },
     "context_ids": [
       "business_expense_reimbursement_policy_v1.txt:0000",
