@@ -1,12 +1,18 @@
 import re
+from functools import cache
 
 import spacy  # pyright: ignore[reportMissingImports]
 
-nlp = spacy.load("en_core_web_sm")
+
+@cache
+def _nlp():
+    """Load the spaCy model on first use rather than at import time."""
+    return spacy.load("en_core_web_sm")
 
 
 def extract_keywords(question: str) -> list[str]:
-    doc = nlp(question)
+    """Entities, noun phrases, noun/number lemmas, and policy IDs, deduplicated."""
+    doc = _nlp()(question)
     keywords = []
 
     for ent in doc.ents:
@@ -25,10 +31,7 @@ def extract_keywords(question: str) -> list[str]:
         if token.pos_ in {"NOUN", "PROPN", "NUM"}:
             keywords.append(token.lemma_.lower())
 
-    policy_ids = re.findall(
-        r"\b[A-Z]{2,5}-\d+\b",
-        question
-    )
+    policy_ids = re.findall(r"\b[A-Z]{2,5}-\d+\b", question)
     keywords.extend(policy_ids)
 
     return list(dict.fromkeys(keywords))
