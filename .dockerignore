@@ -1,0 +1,13 @@
+# Secrets are passed at runtime via env_file, never baked into the image.
+.env
+
+.git
+.github
+.venv
+__pycache__/
+*.py[oc]
+.pytest_cache/
+.ruff_cache/
+.coverage
+chroma_data/
+test/

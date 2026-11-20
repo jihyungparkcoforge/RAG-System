@@ -4,7 +4,7 @@ from unittest.mock import MagicMock
 
 import numpy as np
 
-from src.RAGPipeline import RAGPipeline
+from src.rag_pipeline import RAGPipeline
 
 
 class FakeEmbeddingModel:
@@ -37,7 +37,10 @@ class FakeCollection:
     def __init__(self, get_result=None, query_result=None, records=None):
         self.get_result = get_result or {"ids": [], "documents": [], "metadatas": []}
         self.query_result = query_result or {
-            "ids": [[]], "documents": [[]], "metadatas": [[]], "distances": [[]],
+            "ids": [[]],
+            "documents": [[]],
+            "metadatas": [[]],
+            "distances": [[]],
         }
         self.records = records or {}
         self.get_calls = []
@@ -50,7 +53,9 @@ class FakeCollection:
             return {
                 "ids": found,
                 "documents": [self.records[chunk_id]["document"] for chunk_id in found],
-                "metadatas": [self.records[chunk_id].get("metadata", {}) for chunk_id in found],
+                "metadatas": [
+                    self.records[chunk_id].get("metadata", {}) for chunk_id in found
+                ],
             }
         return self.get_result
 

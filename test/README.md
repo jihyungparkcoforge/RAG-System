@@ -4,10 +4,10 @@ Run from the project root. This suite contains 10 evaluation questions, each wit
 
 ## Install and run
 
-The application dependencies must already be installed in `.venv`.
+`uv sync` installs the application and the `dev` dependency group (pytest, pytest-cov, ruff) into `.venv`.
 
 ```bash
-uv pip install --python .venv/bin/python -r test/requirements.txt
+uv sync
 .venv/bin/python -m pytest test -q --eval-report test/results-retrieval.json
 ```
 

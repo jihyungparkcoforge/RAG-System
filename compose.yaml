@@ -1,0 +1,14 @@
+services:
+  rag:
+    build: .
+    env_file: .env
+    stdin_open: true
+    tty: true
+    volumes:
+      - chroma-data:/app/chroma_data # vector database built by --ingest
+      - model-cache:/models # Hugging Face models, downloaded once
+      - ./docs:/app/docs:ro # edit docs/ and re-ingest without rebuilding
+
+volumes:
+  chroma-data:
+  model-cache:

@@ -4,9 +4,9 @@ import json
 import math
 import os
 import re
+import sys
 import urllib.error
 import urllib.request
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,12 +35,13 @@ def build_eval_pipeline(db_path, chunk_size=800, overlap=50):
     import chromadb
     from sentence_transformers import CrossEncoder, SentenceTransformer
 
-    from src.RAGPipeline import EMBEDDING_MODEL_NAME, RERANKER_MODEL_NAME, RAGPipeline
+    from src.rag_pipeline import EMBEDDING_MODEL_NAME, RERANKER_MODEL_NAME, RAGPipeline
 
     pipeline = RAGPipeline.__new__(RAGPipeline)
     client = chromadb.PersistentClient(path=str(db_path))
     pipeline.collection = client.create_collection(
-        name=EVAL_COLLECTION, embedding_function=None,
+        name=EVAL_COLLECTION,
+        embedding_function=None,
         configuration={"hnsw": {"space": "cosine"}},
     )
     pipeline.embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME, device="cpu")
@@ -56,8 +57,12 @@ def attach_llm_client(pipeline):
     missing = missing_env(GENERATION_ENV)
     if missing:
         raise RuntimeError("Missing configuration: " + ", ".join(missing))
-    pipeline.llm_client = OpenAI(base_url=os.environ["FOUNDRY_BASE_URL"],
-                                 api_key=os.environ["FOUNDRY_API_KEY"], timeout=60, max_retries=0)
+    pipeline.llm_client = OpenAI(
+        base_url=os.environ["FOUNDRY_BASE_URL"],
+        api_key=os.environ["FOUNDRY_API_KEY"],
+        timeout=60,
+        max_retries=0,
+    )
     pipeline.llm_model = os.environ["FOUNDRY_DEPLOYMENT_NAME"]
     return pipeline
 
@@ -72,7 +77,10 @@ def rank_summary(rows):
     if not rows:
         return None
     return {
-        stage: {metric: _mean(row[stage][metric] for row in rows) for metric in rows[0][stage]}
+        stage: {
+            metric: _mean(row[stage][metric] for row in rows)
+            for metric in rows[0][stage]
+        }
         for stage in ("pre_rerank", "post_rerank")
     }
 
@@ -81,7 +89,9 @@ def build_report(rows, **extra):
     """Summarize evaluation rows into the JSON report structure."""
     retrieval = [row for row in rows if row["stage"] == "retrieval"]
     generation = [row for row in rows if row["stage"] == "generation"]
-    verdicts = [row["decision_judge"]["verdict"] for row in generation if row["decision_judge"]]
+    verdicts = [
+        row["decision_judge"]["verdict"] for row in generation if row["decision_judge"]
+    ]
     return {
         **extra,
         "retrieval_cases_evaluated": len(retrieval),
@@ -91,7 +101,8 @@ def build_report(rows, **extra):
         "generation_cases_evaluated": len(generation),
         "judge_verdicts": (
             {verdict: verdicts.count(verdict) for verdict in sorted(set(verdicts))}
-            if verdicts else None
+            if verdicts
+            else None
         ),
         "results": rows,
     }
@@ -126,7 +137,10 @@ def _recall(expected, ids):
 
 def _reciprocal_rank(expected, ids):
     """1/rank of the first gold chunk; 0.0 if none is present."""
-    return next((1.0 / rank for rank, chunk_id in enumerate(ids, 1) if chunk_id in expected), 0.0)
+    return next(
+        (1.0 / rank for rank, chunk_id in enumerate(ids, 1) if chunk_id in expected),
+        0.0,
+    )
 
 
 def _rank_metrics(expected, ids):
@@ -164,17 +178,24 @@ def evaluate_retrieval(pipeline, case, k=5):
         "post_rerank": _rank_metrics(expected, ranked_ids),
         "gold_ranks": {
             chunk_id: {
-                "pre_rerank": candidate_ids.index(chunk_id) + 1 if chunk_id in candidate_ids else None,
-                "post_rerank": ranked_ids.index(chunk_id) + 1 if chunk_id in ranked_ids else None,
+                "pre_rerank": candidate_ids.index(chunk_id) + 1
+                if chunk_id in candidate_ids
+                else None,
+                "post_rerank": ranked_ids.index(chunk_id) + 1
+                if chunk_id in ranked_ids
+                else None,
             }
             for chunk_id in sorted(expected)
         },
         "gold_retrieved_by": {
-            chunk["id"]: chunk["retrieved_by"] for chunk in candidates if chunk["id"] in expected
+            chunk["id"]: chunk["retrieved_by"]
+            for chunk in candidates
+            if chunk["id"] in expected
         },
         "gold_matched_keywords": {
             chunk["id"]: chunk["matched_keywords"]
-            for chunk in candidates if chunk["id"] in expected and "matched_keywords" in chunk
+            for chunk in candidates
+            if chunk["id"] in expected and "matched_keywords" in chunk
         },
     }
 
@@ -252,12 +273,19 @@ def judge_answer_with_decision(case, answer, *, threshold=0.5):
     if answer_data.get("type") != "noul":
         raise RuntimeError("Foundry decision API did not return a noul answer")
     p = answer_data.get("noul")
-    if isinstance(p, bool) or not isinstance(p, (int, float)) or not math.isfinite(p) or not 0 <= p <= 1:
+    if (
+        isinstance(p, bool)
+        or not isinstance(p, (int, float))
+        or not math.isfinite(p)
+        or not 0 <= p <= 1
+    ):
         raise RuntimeError("Foundry decision API returned an invalid probability")
 
     verdict = (
-        "correct" if p >= threshold
-        else "incorrect" if p <= 1.0 - threshold
+        "correct"
+        if p >= threshold
+        else "incorrect"
+        if p <= 1.0 - threshold
         else "review"
     )
     return {
@@ -272,7 +300,8 @@ def judge_answer_with_decision(case, answer, *, threshold=0.5):
 def missing_answer_facts(case, answer):
     """Names of the case's regex answer checks that the answer does not satisfy."""
     return [
-        check["name"] for check in case["answer_checks"]
+        check["name"]
+        for check in case["answer_checks"]
         if not re.search(check["pattern"], answer, re.IGNORECASE | re.DOTALL)
     ]
 
@@ -294,12 +323,14 @@ def evaluate_generation(pipeline, case, *, run_judge=False, decision_threshold=0
     citations = cited_labels(answer)
     allowed = {str(i) for i in range(1, len(chunks) + 1)}
     required = {
-        str(i) for i, chunk in enumerate(chunks, 1)
+        str(i)
+        for i, chunk in enumerate(chunks, 1)
         if chunk["id"] in case["expected_chunk_ids"]
     }
     decision_judge = (
         judge_answer_with_decision(case, answer, threshold=decision_threshold)
-        if run_judge else None
+        if run_judge
+        else None
     )
     return {
         "case_id": case["id"],

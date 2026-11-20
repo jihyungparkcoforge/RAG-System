@@ -5,13 +5,25 @@ import conftest
 
 
 def retrieval_row(recall):
-    metrics = {"recall_at_1": recall, "recall_at_3": recall, "recall_at_5": recall, "mrr": recall}
-    return {"stage": "retrieval", "k": 5, "recall_at_k": recall,
-            "pre_rerank": metrics, "post_rerank": metrics}
+    metrics = {
+        "recall_at_1": recall,
+        "recall_at_3": recall,
+        "recall_at_5": recall,
+        "mrr": recall,
+    }
+    return {
+        "stage": "retrieval",
+        "k": 5,
+        "recall_at_k": recall,
+        "pre_rerank": metrics,
+        "post_rerank": metrics,
+    }
 
 
 def fake_config(rows, **options):
-    return SimpleNamespace(evaluation_rows=rows, getoption=lambda name: options.get(name))
+    return SimpleNamespace(
+        evaluation_rows=rows, getoption=lambda name: options.get(name)
+    )
 
 
 def test_generation_tests_are_skipped_without_flag():
@@ -29,7 +41,9 @@ def test_generation_tests_are_skipped_without_flag():
     assert [item for item, _ in marked] == [generation]
 
     marked.clear()
-    conftest.pytest_collection_modifyitems(fake_config([], **{"--run-generation": True}), [generation])
+    conftest.pytest_collection_modifyitems(
+        fake_config([], **{"--run-generation": True}), [generation]
+    )
     assert marked == []
 
 
@@ -41,7 +55,8 @@ def test_session_finish_writes_report_only_when_requested(tmp_path):
     assert not path.exists()
 
     conftest.pytest_sessionfinish(
-        SimpleNamespace(config=fake_config(rows, **{"--eval-report": str(path)})), 1,
+        SimpleNamespace(config=fake_config(rows, **{"--eval-report": str(path)})),
+        1,
     )
     report = json.loads(path.read_text())
     assert report["pytest_exit_status"] == 1
@@ -62,8 +77,11 @@ def test_terminal_summary_prints_retrieval_metrics():
 
 def test_terminal_summary_is_silent_without_retrieval_rows():
     lines = []
-    reporter = SimpleNamespace(config=fake_config([]), write_sep=lambda *a: lines.append(a),
-                               write_line=lambda *a: lines.append(a))
+    reporter = SimpleNamespace(
+        config=fake_config([]),
+        write_sep=lambda *a: lines.append(a),
+        write_line=lambda *a: lines.append(a),
+    )
     conftest.pytest_terminal_summary(reporter)
     assert lines == []
 

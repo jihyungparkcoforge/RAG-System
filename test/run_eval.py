@@ -15,19 +15,40 @@ import tempfile
 from pathlib import Path
 
 from dotenv import load_dotenv
-
 from evaluation import (
-    EVAL_COLLECTION, JUDGE_ENV, ROOT, attach_llm_client, build_eval_pipeline, build_report,
-    evaluate_generation, evaluate_retrieval, load_cases, missing_env,
+    EVAL_COLLECTION,
+    JUDGE_ENV,
+    ROOT,
+    attach_llm_client,
+    build_eval_pipeline,
+    build_report,
+    evaluate_generation,
+    evaluate_retrieval,
+    load_cases,
+    missing_env,
 )
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--k", type=int, default=5, help="Top-k cutoff for recall_at_k (default 5).")
-    parser.add_argument("--case", action="append", help="Run only this case id (repeatable).")
-    parser.add_argument("--generation", action="store_true", help="Also evaluate generated answers (API calls).")
-    parser.add_argument("--judge", action="store_true", help="Also run the decision judge (needs --generation).")
+    doc = __doc__
+    assert doc is not None
+    parser = argparse.ArgumentParser(description=doc.splitlines()[0])
+    parser.add_argument(
+        "--k", type=int, default=5, help="Top-k cutoff for recall_at_k (default 5)."
+    )
+    parser.add_argument(
+        "--case", action="append", help="Run only this case id (repeatable)."
+    )
+    parser.add_argument(
+        "--generation",
+        action="store_true",
+        help="Also evaluate generated answers (API calls).",
+    )
+    parser.add_argument(
+        "--judge",
+        action="store_true",
+        help="Also run the decision judge (needs --generation).",
+    )
     parser.add_argument("--report", help="Write the full JSON report to this path.")
     args = parser.parse_args()
     if args.judge and not args.generation:
@@ -37,7 +58,7 @@ def parse_args():
 
 def print_table(headers, rows):
     widths = [max(len(str(x)) for x in column) for column in zip(headers, *rows)]
-    line = "  ".join("{:<%d}" % width for width in widths)
+    line = "  ".join(f"{{:<{width}}}" for width in widths)
     print(line.format(*headers))
     print("  ".join("-" * width for width in widths))
     for row in rows:
@@ -55,7 +76,18 @@ def fmt_ranks(row):
 def print_retrieval(rows, k):
     print(f"\n=== Retrieval (recall_at_k uses k={k}; R@n = post-rerank recall@n) ===")
     print_table(
-        ["case", f"recall@{k}", "cand_recall", "R@1", "R@3", "R@5", "MRR pre→post", "gold rank pre→post", "via", "gold keywords"],
+        [
+            "case",
+            f"recall@{k}",
+            "cand_recall",
+            "R@1",
+            "R@3",
+            "R@5",
+            "MRR pre→post",
+            "gold rank pre→post",
+            "via",
+            "gold keywords",
+        ],
         [
             [
                 row["case_id"],
@@ -66,8 +98,20 @@ def print_retrieval(rows, k):
                 f"{row['post_rerank']['recall_at_5']:.2f}",
                 f"{row['pre_rerank']['mrr']:.2f}→{row['post_rerank']['mrr']:.2f}",
                 fmt_ranks(row),
-                ",".join(sorted({way for ways in row["gold_retrieved_by"].values() for way in ways})) or "-",
-                "; ".join(",".join(words) for words in row["gold_matched_keywords"].values()) or "-",
+                ",".join(
+                    sorted(
+                        {
+                            way
+                            for ways in row["gold_retrieved_by"].values()
+                            for way in ways
+                        }
+                    )
+                )
+                or "-",
+                "; ".join(
+                    ",".join(words) for words in row["gold_matched_keywords"].values()
+                )
+                or "-",
             ]
             for row in rows
         ],
@@ -84,7 +128,9 @@ def print_generation(rows):
                 ",".join(row["missing_facts"]) or "-",
                 ",".join(row["invalid_citations"]) or "-",
                 ",".join(row["missing_evidence_citations"]) or "-",
-                f"{row['decision_judge']['probability_correct']:.3f}" if row["decision_judge"] else "-",
+                f"{row['decision_judge']['probability_correct']:.3f}"
+                if row["decision_judge"]
+                else "-",
                 row["decision_judge"]["verdict"] if row["decision_judge"] else "-",
             ]
             for row in rows
@@ -94,13 +140,22 @@ def print_generation(rows):
 
 def print_summary(report, k):
     print("\n=== Summary ===")
-    print(f"mean recall@{k}: {report['mean_recall_at_k']:.3f} ({report['retrieval_cases_evaluated']} cases)")
+    print(
+        f"mean recall@{k}: {report['mean_recall_at_k']:.3f} ({report['retrieval_cases_evaluated']} cases)"
+    )
     for stage, metrics in report["rank_metrics"].items():
-        print(f"{stage:12} " + "  ".join(f"{name}={value:.3f}" for name, value in metrics.items()))
+        print(
+            f"{stage:12} "
+            + "  ".join(f"{name}={value:.3f}" for name, value in metrics.items())
+        )
     generation = [row for row in report["results"] if row["stage"] == "generation"]
     if generation:
         passed = sum(
-            not (row["missing_facts"] or row["invalid_citations"] or row["missing_evidence_citations"])
+            not (
+                row["missing_facts"]
+                or row["invalid_citations"]
+                or row["missing_evidence_citations"]
+            )
             for row in generation
         )
         print(f"generation regex+citation checks passed: {passed}/{len(generation)}")
@@ -132,7 +187,9 @@ def main():
                 try:
                     for case in cases:
                         print(f"Generating: {case['id']}")
-                        generation.append(evaluate_generation(pipeline, case, run_judge=args.judge))
+                        generation.append(
+                            evaluate_generation(pipeline, case, run_judge=args.judge)
+                        )
                 finally:
                     pipeline.llm_client.close()
         finally:

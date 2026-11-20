@@ -1,5 +1,4 @@
 import pytest
-
 from evaluation import evaluate_retrieval, load_cases
 
 

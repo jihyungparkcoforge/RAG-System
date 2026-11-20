@@ -1,10 +1,12 @@
+from typing import ClassVar
+
 import pytest
 
 import main
 
 
 class FakeRAG:
-    instances = []
+    instances: ClassVar[list["FakeRAG"]] = []
 
     def __init__(self, db_path):
         self.db_path = db_path
@@ -24,6 +26,7 @@ class FakeRAG:
 def fake_rag(monkeypatch):
     FakeRAG.instances = []
     monkeypatch.setattr(main, "RAGPipeline", FakeRAG)
+    monkeypatch.setattr(main, "load_dotenv", lambda: None)
 
 
 def test_ingest_flag_indexes_docs_and_exits(monkeypatch, capsys):
